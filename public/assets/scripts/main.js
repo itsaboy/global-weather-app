@@ -3,10 +3,15 @@ const getGeoData = async (currentLocation) => {
     const res = await fetch(req);
     const geoData = await res.json();
 
-    if (res.status === 200) {
+    if (res.status === 200 && newSearch === true) {
+        saveLocation(currentLocation);
+        newSearch = false;
         getCurrentWeather(geoData[0]);
         getForecastWeather(geoData[0]);
-    }
+    } else if (res.status === 200 && newSearch === false) {
+        getCurrentWeather(geoData[0]);
+        getForecastWeather(geoData[0]);
+    };
 };
 
 const getCurrentWeather = async (geoData) => {
@@ -19,7 +24,7 @@ const getCurrentWeather = async (geoData) => {
     
     if (res.status === 200) {
         displayCurrentWeather(currentData);
-    }
+    };
 };
 
 const getForecastWeather = async (geoData) => {
@@ -32,10 +37,10 @@ const getForecastWeather = async (geoData) => {
     
     if (res.status === 200) {
         displayForecastWeather(forecastData);
-    }
+    };
 };
 
-const saveLocation = () => {
+const saveLocation = (currentLocation) => {
     history.push(currentLocation);
     for (let i = 0; i < history.length; i++) {
         localStorage.setItem(i, JSON.stringify(history[i]));
@@ -74,7 +79,7 @@ const populateDropdown = () => {
     };
 };
 
-const displayLocation = () => {
+const displayLocation = (currentLocation) => {
     if (!currentLocation.state) {
         $("#location").text(`${currentLocation.city}, ${currentLocation.country}`);
     } else {

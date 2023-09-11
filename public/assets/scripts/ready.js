@@ -15,6 +15,7 @@ jQuery(() => {
 
     $("#country-input").on("change", () => {
         currentLocation.country = $("#country-input option:selected").val();
+        console.log(currentLocation); 
         checkIfUSA();
     });
 
@@ -26,10 +27,11 @@ jQuery(() => {
         && history.some(obj => obj.city === currentLocation.city)) {
             console.log("in history");
         } else {
-            displayLocation();
-            saveLocation();            
+            newSearch = true;
+            displayLocation(currentLocation);            
             getGeoData(currentLocation);
-        };       
+            console.log(currentLocation); 
+        };      
         fieldReset();
     });
 
@@ -41,7 +43,7 @@ jQuery(() => {
 
     $("#load-button").on("click", (event) => {
         event.preventDefault();
-        displayLocation();
+        displayLocation(currentLocation);
         getGeoData(currentLocation);
         fieldReset();
     });

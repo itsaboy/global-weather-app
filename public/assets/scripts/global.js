@@ -4,6 +4,7 @@ const key = "fd03838b9b2723c3ea2712dc8e4df0e6";
 
 // Search variables
 let history = [];
+let newSearch = false;
 let currentLocation = {
     country: "",
     state: "",
