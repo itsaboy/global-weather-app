@@ -88,6 +88,7 @@ const displayLocation = (currentLocation) => {
 };
 
 const displayCurrentWeather = (currentData) => {
+    $("#current-data").removeClass("hidden");
     unixTime = dayjs().utc().unix() * 1000;
     unixOffset = currentData.timezone;
     currentDate = dayjs(unixTime - unixOffset).format("MMM-D-YYYY");
