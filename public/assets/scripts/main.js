@@ -18,7 +18,6 @@ const getCurrentWeather = async (geoData) => {
     const currentData = await res.json();
     
     if (res.status === 200) {
-        displayLocation();
         displayCurrentWeather(currentData);
     }
 };

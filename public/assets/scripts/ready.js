@@ -21,16 +21,15 @@ jQuery(() => {
     $("#search-button").on("click", (event) => {
         event.preventDefault();
         currentLocation.city = $("#city-input").val();
-
         if (history.some(obj => obj.country === currentLocation.country)
         && history.some(obj => obj.state === currentLocation.state)
         && history.some(obj => obj.city === currentLocation.city)) {
             console.log("in history");
         } else {
+            displayLocation();
             saveLocation();            
             getGeoData(currentLocation);
-        };
-        
+        };       
         fieldReset();
     });
 
@@ -42,9 +41,8 @@ jQuery(() => {
 
     $("#load-button").on("click", (event) => {
         event.preventDefault();
-
+        displayLocation();
         getGeoData(currentLocation);
-
         fieldReset();
     });
 
