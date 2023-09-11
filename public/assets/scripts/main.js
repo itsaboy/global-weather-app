@@ -115,6 +115,8 @@ const displayCurrentWeather = (currentData) => {
 };
 
 const displayForecastWeather = (forecastData) => {
+    // Label
+    $("#forecast-labels").removeClass("hidden");
     // Day one
     $("#day1-data").removeClass("hidden");
     $("#day1-date").text(dayjs(unixTime).add(1, "day").startOf("day").format("MMM-D-YYYY"));
