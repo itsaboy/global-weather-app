@@ -157,4 +157,11 @@
         width: 95%;
     }
 
+    #error-modal {
+        width: 75%;
+        height: 50%;
+        margin: auto;
+        top: 600px;
+    }
+
 }
