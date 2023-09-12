@@ -1,19 +1,25 @@
+// get geodata
 const getGeoData = async (currentLocation) => {
     const req = `${endpoint}/geo/1.0/direct?q=${currentLocation.city},${currentLocation.state},${currentLocation.country}&appid=${key}`;
     const res = await fetch(req);
     const geoData = await res.json();
 
     if (res.status === 200 && newSearch === true) {
+        displayLocation(currentLocation);
         saveLocation(currentLocation);
         newSearch = false;
         getCurrentWeather(geoData[0]);
         getForecastWeather(geoData[0]);
     } else if (res.status === 200 && newSearch === false) {
+        displayLocation(currentLocation);
         getCurrentWeather(geoData[0]);
         getForecastWeather(geoData[0]);
+    } else {
+        displayErrorModal(`Status: ${res.status}`);
     };
 };
 
+// get current weather
 const getCurrentWeather = async (geoData) => {
     let latitude = geoData.lat;
     let longitude = geoData.lon;
@@ -24,9 +30,12 @@ const getCurrentWeather = async (geoData) => {
     
     if (res.status === 200) {
         displayCurrentWeather(currentData);
+    } else {
+        displayErrorModal(`Status: ${res.status}`);
     };
 };
 
+// get five-day forecast
 const getForecastWeather = async (geoData) => {
     let latitude = geoData.lat;
     let longitude = geoData.lon;
@@ -37,9 +46,12 @@ const getForecastWeather = async (geoData) => {
     
     if (res.status === 200) {
         displayForecastWeather(forecastData);
+    } else {
+        displayErrorModal(`Status: ${res.status}`);
     };
 };
 
+// saves new location
 const saveLocation = (currentLocation) => {
     history.push(currentLocation);
     for (let i = 0; i < history.length; i++) {
@@ -51,6 +63,7 @@ const saveLocation = (currentLocation) => {
     currentLocation.city = "";
 };
 
+// loads saved locations
 const loadLocations = () => {
     history = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -59,6 +72,31 @@ const loadLocations = () => {
     populateDropdown();
 };
 
+// reloads saved locations after one is deleted
+const reloadLocations = () => {
+    for (let i = 0; i < history.length; i++) {
+        localStorage.setItem(i, JSON.stringify(history[i]));
+    };
+    loadLocations();
+}
+
+// deletes saved location
+const deleteLocation = () => {
+    for (let i = 0; i < history.length; i++) {
+        if (history[i].country === currentLocation.country
+        && history[i].state === currentLocation.state
+        && history[i].city === currentLocation.city) {
+            history.splice(i, 1);
+            localStorage.clear();
+        };
+    };
+    currentLocation.country = "";
+    currentLocation.state = "";
+    currentLocation.city = "";
+    reloadLocations();
+};
+
+// fills saved locations dropdown
 const populateDropdown = () => {
     $("#saved-locations").empty();
     $("#saved-locations").append(`<option value="none" selected disabled>Location</option>`);
@@ -79,6 +117,7 @@ const populateDropdown = () => {
     };
 };
 
+// displays current location
 const displayLocation = (currentLocation) => {
     if (!currentLocation.state) {
         $("#location").text(`${currentLocation.city}, ${currentLocation.country}`);
@@ -87,6 +126,7 @@ const displayLocation = (currentLocation) => {
     };
 };
 
+// displays current weather
 const displayCurrentWeather = (currentData) => {
     $("#current-data").removeClass("hidden");
     unixTime = dayjs().utc().unix() * 1000;
@@ -110,11 +150,12 @@ const displayCurrentWeather = (currentData) => {
         $("#day0-icon").attr("src", stormy);
     } else if (currentData.weather[0].main === "Snow") {
         $("#day0-icon").attr("src", snowy);
-    } else if (currentData.weather[0].main === "Mist") {
+    } else if (currentData.weather[0].main === "Haze") {
         $("#day0-icon").attr("src", hazy);
     };    
 };
 
+// displays five-day forecast
 const displayForecastWeather = (forecastData) => {
     // Label
     $("#forecast-labels").removeClass("hidden");
@@ -137,7 +178,7 @@ const displayForecastWeather = (forecastData) => {
         $("#day1-icon").attr("src", stormy);
     } else if (forecastData.list[0].weather[0].main === "Snow") {
         $("#day1-icon").attr("src", snowy);
-    } else if (forecastData.list[0].weather[0].main === "Mist") {
+    } else if (forecastData.list[0].weather[0].main === "Haze") {
         $("#day1-icon").attr("src", hazy);
     };
 
@@ -160,7 +201,7 @@ const displayForecastWeather = (forecastData) => {
         $("#day2-icon").attr("src", stormy);
     } else if (forecastData.list[1].weather[0].main === "Snow") {
         $("#day2-icon").attr("src", snowy);
-    } else if (forecastData.list[1].weather[0].main === "Mist") {
+    } else if (forecastData.list[1].weather[0].main === "Haze") {
         $("#day2-icon").attr("src", hazy);
     };
 
@@ -183,7 +224,7 @@ const displayForecastWeather = (forecastData) => {
         $("#day3-icon").attr("src", stormy);
     } else if (forecastData.list[2].weather[0].main === "Snow") {
         $("#day3-icon").attr("src", snowy);
-    } else if (forecastData.list[2].weather[0].main === "Mist") {
+    } else if (forecastData.list[2].weather[0].main === "Haze") {
         $("#day3-icon").attr("src", hazy);
     };
 
@@ -206,7 +247,7 @@ const displayForecastWeather = (forecastData) => {
         $("#day4-icon").attr("src", stormy);
     } else if (forecastData.list[3].weather[0].main === "Snow") {
         $("#day4-icon").attr("src", snowy);
-    } else if (forecastData.list[3].weather[0].main === "Mist") {
+    } else if (forecastData.list[3].weather[0].main === "Haze") {
         $("#day4-icon").attr("src", hazy);
     };
 
@@ -229,7 +270,7 @@ const displayForecastWeather = (forecastData) => {
         $("#day5-icon").attr("src", stormy);
     } else if (forecastData.list[4].weather[0].main === "Snow") {
         $("#day5-icon").attr("src", snowy);
-    } else if (forecastData.list[4].weather[0].main === "Mist") {
+    } else if (forecastData.list[4].weather[0].main === "Haze") {
         $("#day5-icon").attr("src", hazy);
     };
 };

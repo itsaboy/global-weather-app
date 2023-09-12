@@ -20,10 +20,11 @@
         <!--Internal Scripts-->
         <script src="./assets/scripts/global.js" defer></script>
         <script src="./assets/scripts/main.js" defer></script>
+        <script src="./assets/scripts/errors.js" defer></script>
         <script src="./assets/scripts/ready.js" defer></script>
     </head>
 
-    <body class="bg-sky-300">
+    <body class="bg-sky-300 font-primary">
         <div class="body-container">
             <!--Header-->
             <header id="header" class="bg-sky-900">
@@ -48,7 +49,7 @@
                             <form id="search-form">
                                 <div class="save-container">
                                     <label for="country-input" id="country-label" class="text-center text-sky-950 text-xl p-2 font-semibold">
-                                        Country
+                                        Country:
                                     </label>
                                     <select id="country-input" class="bg-sky-200 w-24 py-1">
                                         <option value="none" selected disabled>Country:</option>
@@ -306,7 +307,7 @@
                                         <option value="ZWE">Zimbabwe</option>
                                     </select>
                                     <label for="state-input" id="state-label" class="text-center text-sky-950 text-xl p-2 font-semibold">
-                                        State
+                                        State:
                                     </label>
                                     <select id="state-input" class="bg-sky-200 w-24 py-1">
                                         <option value="none" selected disabled>State:</option>
@@ -364,7 +365,7 @@
                                     <label for="city-input" id="city-label" class="text-center text-sky-950 text-xl p-2 font-semibold">
                                         City:
                                     </label>
-                                    <input id="city-input" class="bg-sky-200 w-56 py-1">
+                                    <input id="city-input" class="bg-sky-200 w-56 py-1 px-2">
                                     <button id="search-button" class="bg-sky-900 w-24 py-1 text-sky-200 border-sky-200 border-solid border-2 rounded-lg shadow-md hover:bg-sky-200 hover:text-sky-950 hover:border-sky-800">
                                         Search
                                     </button>
@@ -387,7 +388,7 @@
                                         Delete
                                     </button>
                                     <label for="saved-locations" id="locations-label" class="text-center text-sky-950 text-xl p-2 font-semibold">
-                                        Saved Locations
+                                        Saved Locations:
                                     </label>
                                     <select id="saved-locations" class="bg-sky-200 w-56 py-1">
                                         <option class="text-left">
@@ -401,18 +402,18 @@
                     <!--Current Weather-->
                     <section id="current-section" class="bg-sky-500 rounded-lg shadow-2xl font-semibold">
                         <div class="current-container">
-                            <h2 id="current-heading" class="text-center text-sky-950 text-4xl p-2">
+                            <h2 id="current-heading" class="text-center text-sky-950 text-4xl p-2 underline">
                                 Current Weather
                             </h2>
                             <section id="current-data" class="text-center text-sky-950 text-2xl p-2 hidden">
                                 <div class="day0-container">
-                                    <h3 id="day0-date">
+                                    <h3 id="day0-date" class="text-3xl">
                                         <!--content injected by main.js-->
                                     </h3>
-                                    <h3 id="day0-day">
+                                    <h3 id="day0-day" class="text-3xl">
                                         <!--content injected by main.js-->
                                     </h3>
-                                    <h3 id="day0-descr">
+                                    <h3 id="day0-descr" class="text-3xl">
                                         <!--content injected by main.js-->
                                     </h3>
                                     <img id="day0-icon" class="w-24" alt="weather icon">
@@ -435,7 +436,7 @@
                     <!--Five Day Forecast-->
                     <section id="forecast-section" class="bg-sky-500 text-center text-sky-200 text-xl p-2 font-semibold rounded-lg shadow-2xl">
                         <div class="forecast-container">
-                            <h2 id="forecast-heading" class="text-center text-sky-950 text-4xl p-2 font-semibold">
+                            <h2 id="forecast-heading" class="text-center text-sky-950 text-4xl p-2 font-semibold underline">
                                 5-Day Forecast
                             </h2>
                             <section id="forecast-labels" class="bg-sky-950 p-8 rounded-md border-2 border-sky-200 shadow-lg hidden">
@@ -464,7 +465,7 @@
                             <!--Day One-->
                             <section id="day1-data" class="bg-sky-800 p-8 rounded-md border-2 border-sky-200 shadow-lg hidden">
                                 <div class="day1-container">
-                                    <h3 id="day1-date">
+                                    <h3 id="day1-date" class="f-date">
                                         <!--content injected by main.js-->
                                     </h3>
                                     <h3 id="day1-day">
@@ -473,7 +474,7 @@
                                     <h3 id="day1-descr">
                                         <!--content injected by main.js-->
                                     </h3>
-                                    <img id="day1-icon" class="w-20" alt="weather icon">
+                                    <img id="day1-icon" class="f-icon w-20" alt="weather icon">
                                     <h3 id="day1-temp">
                                         <!--content injected by main.js-->
                                     </h3>
@@ -488,7 +489,7 @@
                             <!--Day Two-->
                             <section id="day2-data" class="bg-sky-800 p-8 rounded-md border-2 border-sky-200 shadow-lg hidden">
                                 <div class="day2-container">
-                                    <h3 id="day2-date">
+                                    <h3 id="day2-date" class="f-date">
                                         <!--content injected by main.js-->
                                     </h3>
                                     <h3 id="day2-day">
@@ -497,7 +498,7 @@
                                     <h3 id="day2-descr">
                                         <!--content injected by main.js-->
                                     </h3>
-                                    <img id="day2-icon" class="w-20" alt="weather icon">
+                                    <img id="day2-icon" class="f-icon w-20" alt="weather icon">
                                     <h3 id="day2-temp">
                                         <!--content injected by main.js-->
                                     </h3>
@@ -512,7 +513,7 @@
                             <!--Day Three-->
                             <section id="day3-data" class="bg-sky-800 p-8 rounded-md border-2 border-sky-200 shadow-lg hidden">
                                 <div class="day3-container">
-                                    <h3 id="day3-date">
+                                    <h3 id="day3-date" class="f-date">
                                         <!--content injected by main.js-->
                                     </h3>
                                     <h3 id="day3-day">
@@ -521,7 +522,7 @@
                                     <h3 id="day3-descr">
                                         <!--content injected by main.js-->
                                     </h3>
-                                    <img id="day3-icon" class="w-20" alt="weather icon">
+                                    <img id="day3-icon" class="f-icon w-20" alt="weather icon">
                                     <h3 id="day3-temp">
                                         <!--content injected by main.js-->
                                     </h3>
@@ -536,7 +537,7 @@
                             <!--Day Four-->
                             <section id="day4-data" class="bg-sky-800 p-8 rounded-md border-2 border-sky-200 shadow-lg hidden">
                                 <div class="day4-container">
-                                    <h3 id="day4-date">
+                                    <h3 id="day4-date" class="f-date">
                                         <!--content injected by main.js-->
                                     </h3>
                                     <h3 id="day4-day">
@@ -545,7 +546,7 @@
                                     <h3 id="day4-descr">
                                         <!--content injected by main.js-->
                                     </h3>
-                                    <img id="day4-icon" class="w-20" alt="weather icon">
+                                    <img id="day4-icon" class="f-icon w-20" alt="weather icon">
                                     <h3 id="day4-temp">
                                         <!--content injected by main.js-->
                                     </h3>
@@ -560,7 +561,7 @@
                             <!--Day Five-->
                             <section id="day5-data" class="bg-sky-800 p-8 rounded-md border-2 border-sky-200 shadow-lg hidden">
                                 <div class="day5-container">
-                                    <h3 id="day5-date">
+                                    <h3 id="day5-date" class="f-date">
                                         <!--content injected by main.js-->
                                     </h3>
                                     <h3 id="day5-day">
@@ -569,7 +570,7 @@
                                     <h3 id="day5-descr">
                                         <!--content injected by main.js-->
                                     </h3>
-                                    <img id="day5-icon" class="w-20" alt="weather icon">
+                                    <img id="day5-icon" class="f-icon w-20" alt="weather icon">
                                     <h3 id="day5-temp">
                                         <!--content injected by main.js-->
                                     </h3>
@@ -600,11 +601,20 @@
                 </div>
             </dialog>
             <!--Error-->
-            <dialog>
+            <section id="error-modal" class="hidden absolute inset-0 bg-rose-800 rounded-3xl shadow-2xl border-solid border-2 border-slate-200">
                 <div class="error-container">
-
+                    <h2 id="error-txt" class="text-red-200 text-5xl text-center">
+                        Error!
+                    </h2>
+                    <p id="error-code" class="text-red-200 text-3xl text-center">
+                        <!--content injected by errors.js-->
+                    </p>
+                    <button id="error-button"
+                        class="w-24 bg-red-400 px-4 py-1 rounded-full border-2 border-slate-950 hover:bg-slate-950 hover:border-slate-100 hover:text-red-400">
+                        Ok
+                    </button>
                 </div>
-            </dialog>
+            </section>
         </div>
     </body>
     
